@@ -6,6 +6,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.junit.Test;
 
 public class KafkaDataSourceTest {
+
     @Test
     public void test() {
         String path = "C:\\Users\\Paul\\Desktop\\2016_07_14_20_10-15-15f1.flows";
@@ -19,7 +20,7 @@ public class KafkaDataSourceTest {
                 .setJitter(2000)
                 .build(producer);
 
-        kafkaMessageSender.start();
+//        kafkaMessageSender.start();
 
     }
 }
