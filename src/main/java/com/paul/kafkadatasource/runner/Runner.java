@@ -15,6 +15,7 @@ public class Runner {
     public static final String TOPIC_OPT = "topic";
     public static final String MIN_INTERVAL_OPT = "minInterval";
     public static final String JITTER_OPT = "jitter";
+    public static final String ENDLESS_MODE_OPT = "endlessMode";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Runner.class);
 
@@ -30,11 +31,12 @@ public class Runner {
         options.addOption(TOPIC_OPT, true, "Kafka Topic");
         options.addOption(MIN_INTERVAL_OPT, true, "Min interval");
         options.addOption(JITTER_OPT, true, "Jitter");
+        options.addOption(ENDLESS_MODE_OPT, true, "Endless mode");
         options.addOption("h", false, "Show help");
         CommandLineParser parser = new DefaultParser();
         CommandLine commandLine;
 
-        String helpString = "[-file] [-bootstrapServer] [-topic] [-minInterval] [-jitter]";
+        String helpString = "[-file] [-bootstrapServer] [-topic] [-minInterval] [-jitter] [-endlessMode]";
         HelpFormatter helpFormatter = new HelpFormatter();
 
         try {
@@ -50,12 +52,14 @@ public class Runner {
             String topic = commandLine.getOptionValue(TOPIC_OPT);
             String minInterval = commandLine.getOptionValue(MIN_INTERVAL_OPT, "1000");
             String jitter = commandLine.getOptionValue(JITTER_OPT, "500");
+            String endlessMode = commandLine.getOptionValue(ENDLESS_MODE_OPT, "false");
             Properties properties = new Properties();
             properties.put(FILE_OPT, fileOpt);
             properties.put(BOOTSTRAP_SERVER_OPT, bootstrapServersOpt);
             properties.put(TOPIC_OPT, topic);
             properties.put(MIN_INTERVAL_OPT, minInterval);
             properties.put(JITTER_OPT, jitter);
+            properties.put(ENDLESS_MODE_OPT, endlessMode);
             return properties;
 
         } catch (ParseException e) {
@@ -76,6 +80,7 @@ public class Runner {
                 .setMessageFilePath(path).setTopic(properties.getProperty(TOPIC_OPT))
                 .setMinInterval(Long.valueOf(properties.getProperty(MIN_INTERVAL_OPT)))
                 .setJitter(Long.valueOf(properties.getProperty(JITTER_OPT)))
+                .setEndlessMode("true".equalsIgnoreCase(properties.getProperty(ENDLESS_MODE_OPT)))
                 .build(producer);
     }
 }
