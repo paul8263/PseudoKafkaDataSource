@@ -2,13 +2,15 @@
 
 ## Usage:
 ```
- usage: [-file] [-bootstrapServer] [-topic] [-minInterval] [-jitter] [-endlessMode]
- -bootstrapServer <arg>   Bootstrap servers for kafka
- -endlessMode <arg>       Endless mode
- -file <arg>              Path for the flows file
- -h                       Show help
- -jitter <arg>            Jitter
- -minInterval <arg>       Min interval
- -topic <arg>             Kafka Topic
+ usage: [-help] [-config] [-dataFile] [-bootstrapServers] [-minInterval]
+                [-jitter] [-topic] [-endlessMode]
+  -bootstrapServers <arg>   Kafka bootstrap servers
+  -config <arg>             Path for Config file
+  -dataFile <arg>           Path for data file
+  -endlessMode <arg>        Endless mode
+  -help                     Print help
+  -jitter <arg>             Interval jitter value
+  -minInterval <arg>        Min interval between messages
+  -topic <arg>              Kafka topic
  ```
  
