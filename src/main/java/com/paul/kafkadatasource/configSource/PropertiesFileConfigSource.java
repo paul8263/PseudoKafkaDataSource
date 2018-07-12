@@ -3,6 +3,7 @@ package com.paul.kafkadatasource.configSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.Properties;
 
@@ -19,7 +20,7 @@ public class PropertiesFileConfigSource implements ConfigSource {
     public Configuration buildConfiguration() {
         Properties properties = new Properties();
         try {
-            FileReader fileReader = new FileReader(filePath);
+            FileReader fileReader = new FileReader(new File(filePath));
             properties.load(fileReader);
             String dataFile = properties.getProperty(PropertyFileKeyConstants.DATA_FILE, "");
             String bootstrapServer = properties.getProperty(PropertyFileKeyConstants.BOOTSTRAP_SERVERS, "");
