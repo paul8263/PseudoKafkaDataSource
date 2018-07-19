@@ -4,6 +4,7 @@ import com.paul.kafkadatasource.configSource.Configuration;
 import com.paul.kafkadatasource.factory.KafkaProducerFactory;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,7 +73,8 @@ public class MessageSender {
         private void execute() {
             for (String msg : messageList) {
                 sleep();
-                ProducerRecord<String, String> record = new ProducerRecord<>(configuration.getTopic(), msg);
+                String key = String.valueOf(Utils.murmur2(msg.getBytes()));
+                ProducerRecord<String, String> record = new ProducerRecord<>(configuration.getTopic(), key, msg);
                 kafkaProducer.send(record);
             }
         }
